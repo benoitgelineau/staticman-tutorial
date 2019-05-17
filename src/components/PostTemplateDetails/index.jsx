@@ -1,13 +1,13 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import moment from 'moment'
-import './style.scss'
+import React from 'react';
+import Link from 'gatsby-link';
+import moment from 'moment';
+import './style.scss';
 
 class PostTemplateDetails extends React.Component {
   render() {
-    const { subtitle, author } = this.props.data.site.siteMetadata
-    const post = this.props.data.markdownRemark
-    const tags = post.fields.tagSlugs
+    const { subtitle, author } = this.props.data.site.siteMetadata;
+    const post = this.props.data.markdownRemark;
+    const tags = post.fields.tagSlugs;
 
     const homeBlock = (
       <div>
@@ -15,7 +15,7 @@ class PostTemplateDetails extends React.Component {
           All Articles
         </Link>
       </div>
-    )
+    );
 
     const tagsBlock = (
       <div className="post-single__tags">
@@ -30,9 +30,15 @@ class PostTemplateDetails extends React.Component {
             ))}
         </ul>
       </div>
-    )
+    );
 
-    const commentsBlock = <div />
+    const commentsBlock = (
+      <div>
+        <hr />
+        <h2>Comments</h2>
+        <p>No comments yet.</p>
+      </div>
+    );
 
     return (
       <div>
@@ -40,35 +46,29 @@ class PostTemplateDetails extends React.Component {
         <div className="post-single">
           <div className="post-single__inner">
             <h1 className="post-single__title">{post.frontmatter.title}</h1>
-            <div
-              className="post-single__body"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
+            <div className="post-single__body" dangerouslySetInnerHTML={{ __html: post.html }} />
             <div className="post-single__date">
               <em>
-                Published {moment(post.frontmatter.date).format('D MMM YYYY')}
+                  Published{' '}
+                {moment(post.frontmatter.date).format('D MMM YYYY')}
               </em>
             </div>
           </div>
           <div className="post-single__footer">
             {tagsBlock}
+            {commentsBlock}
             <hr />
             <p className="post-single__footer-text">
               {subtitle}
-              <a
-                href={`https://twitter.com/${author.twitter}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={`https://twitter.com/${author.twitter}`} target="_blank" rel="noopener noreferrer">
                 <br /> <strong>{author.name}</strong> on Twitter
               </a>
             </p>
-            {commentsBlock}
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default PostTemplateDetails
+export default PostTemplateDetails;
